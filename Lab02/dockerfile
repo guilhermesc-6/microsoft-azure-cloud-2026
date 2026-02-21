@@ -1,0 +1,10 @@
+FROM nginx:alpine
+
+# Copia configuração customizada (opcional)
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copia arquivos estáticos para o servidor web
+COPY ./WRC/html /usr/share/nginx/html
+
+# Expõe a porta padrão do Nginx
+EXPOSE 80
