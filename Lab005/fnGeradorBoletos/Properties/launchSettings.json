@@ -2,7 +2,7 @@
   "profiles": {
     "Lab005": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7032",
+      "commandLineArgs": "--port 7032 --cors '*'",
       "launchBrowser": false
     }
   }

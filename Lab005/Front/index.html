@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Código de Barras - Boletos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>💳 Gerador de Código de Barras</h1>
+        <p>Gere códigos de barras para boletos de forma rápida e segura</p>
+      </div>
+
+      <div class="content-wrapper">
+        <!-- Formulário -->
+        <div class="form-section">
+          <form id="barcodeForm" class="form">
+            <div class="form-group">
+              <label for="valor">Valor do Boleto</label>
+              <div class="input-wrapper">
+                <span class="currency">R$</span>
+                <input
+                  type="number"
+                  id="valor"
+                  name="valor"
+                  placeholder="0,00"
+                  step="0.01"
+                  min="0.01"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="dataVencimento">Data de Vencimento</label>
+              <input
+                type="date"
+                id="dataVencimento"
+                name="dataVencimento"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn-generate">
+              <span>Gerar Código de Barras</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Resultado -->
+        <div class="result-section" id="resultSection" style="display: none">
+          <div class="result-card">
+            <h2>Código de Barras Gerado</h2>
+
+            <div class="barcode-container">
+              <img
+                id="barcodeImage"
+                src=""
+                alt="Código de Barras"
+                class="barcode-image"
+              />
+              <div class="barcode-label">
+                <p class="barcode-code" id="barcodeCode"></p>
+              </div>
+            </div>
+
+            <div class="barcode-info">
+              <div class="info-item">
+                <span class="info-label">Valor:</span>
+                <span class="info-value" id="infoValor"></span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Vencimento:</span>
+                <span class="info-value" id="infoVencimento"></span>
+              </div>
+            </div>
+
+            <div class="action-buttons">
+              <button class="btn-copy" onclick="copiarCodigo()">
+                📋 Copiar Código
+              </button>
+              <button class="btn-download" onclick="downloadBarcode()">
+                ⬇️ Baixar Imagem
+              </button>
+              <button class="btn-new" onclick="novoBarcode()">
+                ➕ Novo Código
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading -->
+      <div id="loadingSpinner" class="loading" style="display: none">
+        <div class="spinner"></div>
+        <p>Gerando código de barras...</p>
+      </div>
+
+      <!-- Mensagens -->
+      <div id="messageContainer" class="message-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
