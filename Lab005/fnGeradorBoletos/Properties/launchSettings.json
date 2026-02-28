@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Lab005": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7032",
+      "launchBrowser": false
+    }
+  }
+}
