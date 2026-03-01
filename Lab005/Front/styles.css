@@ -279,6 +279,57 @@ body {
   border-color: var(--primary-dark);
 }
 
+/* Validation section */
+.validation-section {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.validation-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--gray-800);
+}
+
+.btn-validate {
+  padding: 12px 20px;
+  background: var(--success-color);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  margin-top: 12px;
+}
+
+.btn-validate:hover {
+  background: #0ea46c;
+  transform: translateY(-1px);
+}
+
+.validation-result {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.validation-result.success {
+  background: #d1fae5;
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+
+.validation-result.error {
+  background: #fee2e2;
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
 /* Loading */
 .loading {
   position: fixed;

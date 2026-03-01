@@ -88,6 +88,23 @@
                 ➕ Novo Código
               </button>
             </div>
+
+            <!-- Validação -->
+            <div class="validation-section" id="validationSection">
+              <h3>🔍 Validar Código</h3>
+              <div class="form-group">
+                <label for="barcodeInput">Código de Barras</label>
+                <input
+                  type="text"
+                  id="barcodeInput"
+                  placeholder="Digite ou cole o código"
+                />
+              </div>
+              <button class="btn-validate" onclick="validarCodigo()">
+                ✅ Validar Código
+              </button>
+              <div class="validation-result" id="validationResult"></div>
+            </div>
           </div>
         </div>
       </div>

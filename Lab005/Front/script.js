@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:7071/api/barcode-generator';
+const API_URL = 'http://localhost:7032/api/barcode-generator';
+const VALIDATE_URL = 'http://localhost:7033/api/barcode-validate';
 
 // Elementos do DOM
 const barcodeForm = document.getElementById('barcodeForm');
@@ -70,6 +71,17 @@ async function gerarCodigoBarras(valor, dataVencimento) {
     barcodeImage.src = `data:image/png;base64,${data.imagemBase64}`;
     barcodeImage.alt = `Código de Barras: ${data.barcode}`;
 
+    // preencher campo de validação e limpar feedback anterior
+    const barcodeInput = document.getElementById('barcodeInput');
+    if (barcodeInput) {
+      barcodeInput.value = data.barcode;
+    }
+    const validationResult = document.getElementById('validationResult');
+    if (validationResult) {
+      validationResult.textContent = '';
+      validationResult.className = 'validation-result';
+    }
+
     // Formatar valores
     infoValor.textContent = `R$ ${valor.toFixed(2).replace('.', ',')}`;
     infoVencimento.textContent = formatarData(dataVencimento);
@@ -79,6 +91,11 @@ async function gerarCodigoBarras(valor, dataVencimento) {
     resultSection.style.display = 'block';
 
     mostrarMensagem('✅ Código de barras gerado com sucesso!', 'success');
+
+    // validar automaticamente usando o código gerado
+    setTimeout(() => {
+      validarCodigo();
+    }, 100); // pequeno delay para garantir DOM atualizado
   } catch (error) {
     console.error('Erro:', error);
     loadingSpinner.style.display = 'none';
@@ -146,6 +163,68 @@ function mostrarMensagem(texto, tipo = 'success') {
       messageContainer.removeChild(message);
     }, 300);
   }, 4000);
+}
+
+// Função para validar código de barras
+async function validarCodigo() {
+  const input = document.getElementById('barcodeInput');
+  let code = input ? input.value.trim() : '';
+  if (!code && ultimoCodigo) {
+    code = ultimoCodigo;
+    if (input) input.value = code;
+  }
+  if (!code) {
+    mostrarMensagem('Informe ou gere um código para validar', 'error');
+    return;
+  }
+
+  try {
+    // make sure area is visible (in case user manually validates)
+    if (resultSection && resultSection.style.display === 'none') {
+      resultSection.style.display = 'block';
+    }
+    loadingSpinner.style.display = 'flex';
+    const resp = await fetch(VALIDATE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ barcode: code }),
+    });
+
+    const resultDiv = document.getElementById('validationResult');
+    if (!resp.ok) {
+      // try to read error message from body
+      const errData = await resp.json().catch(() => ({}));
+      const messageText = errData.message || `Status ${resp.status}`;
+      if (resultDiv) {
+        resultDiv.className = 'validation-result error';
+        resultDiv.textContent = messageText;
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      throw new Error(messageText);
+    }
+
+    const data = await resp.json();
+    if (resultDiv) {
+      if (data.valido) {
+        resultDiv.className = 'validation-result success';
+        resultDiv.textContent = `${data.mensagem} (vencimento: ${data.vencimento})`;
+      } else {
+        resultDiv.className = 'validation-result error';
+        resultDiv.textContent = data.mensagem || 'Boleto inválido';
+      }
+      resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    mostrarMensagem(
+      data.valido ? '✅ Boleto válido' : '❌ Boleto inválido',
+      data.valido ? 'success' : 'error',
+    );
+  } catch (err) {
+    console.error(err);
+    mostrarMensagem(`❌ ${err.message}`, 'error');
+  } finally {
+    loadingSpinner.style.display = 'none';
+  }
 }
 
 // Função para formatar data
