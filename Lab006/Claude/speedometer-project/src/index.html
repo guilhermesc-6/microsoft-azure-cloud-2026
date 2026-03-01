@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Velocímetro Funcional</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Velocímetro</h1>
+
+      <canvas id="speedometerCanvas" width="400" height="450"></canvas>
+
+      <div class="controls">
+        <button id="accelerateBtn" class="btn btn-accelerate">Acelerar</button>
+        <button id="brakeBtn" class="btn btn-brake">Freiar</button>
+        <button id="resetBtn" class="btn btn-reset">Resetar</button>
+      </div>
+
+      <div class="info">
+        <div class="speed-display"><span id="speedValue">0</span> km/h</div>
+        <div class="stats">
+          <p>Aceleração: <span id="accelValue">0.0</span> m/s²</p>
+          <p>Motor: <span id="engineStatus">Desligado</span></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="physics.js" type="module"></script>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
