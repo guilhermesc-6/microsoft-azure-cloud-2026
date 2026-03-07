@@ -1,9 +1,10 @@
 {
   "python-envs.defaultEnvManager": "ms-python.python:system",
   "python-envs.pythonProjects": [],
-  "azureFunctions.deploySubpath": "Lab005/bin/Release/net8.0/publish",
+  "azureFunctions.deploySubpath": "Lab007/funcions/fnSBRentProcess/bin/Release/net8.0/publish",
   "azureFunctions.projectLanguage": "C#",
   "azureFunctions.projectRuntime": "~4",
   "debug.internalConsoleOptions": "neverOpen",
-  "azureFunctions.preDeployTask": "publish (functions)"
+  "azureFunctions.preDeployTask": "publish (functions)",
+  "azureFunctions.projectSubpath": "Lab007/functions/fnSBRentProcess"
 }
