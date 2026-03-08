@@ -12,7 +12,7 @@
       "type": "process",
       "problemMatcher": "$msCompile",
       "options": {
-        "cwd": "${workspaceFolder}/Lab007/functions/fnSBRentProcess/bin/Debug/net8.0"
+        "cwd": "${workspaceFolder}/Lab007/functions/fnPaymentProccess/bin/Debug/net8.0"
       }
     },
     {
@@ -31,7 +31,7 @@
       },
       "problemMatcher": "$msCompile",
       "options": {
-        "cwd": "${workspaceFolder}/Lab007/functions/fnSBRentProcess/bin/Debug/net8.0"
+        "cwd": "${workspaceFolder}/Lab007/functions/fnPaymentProccess/bin/Debug/net8.0"
       }
     },
     {
@@ -47,7 +47,7 @@
       "type": "process",
       "problemMatcher": "$msCompile",
       "options": {
-        "cwd": "${workspaceFolder}/Lab007/functions/fnSBRentProcess/bin/Release/net8.0"
+        "cwd": "${workspaceFolder}/Lab007/functions/fnPaymentProccess/bin/Release/net8.0"
       }
     },
     {
@@ -64,14 +64,14 @@
       "dependsOn": "clean release (functions)",
       "problemMatcher": "$msCompile",
       "options": {
-        "cwd": "${workspaceFolder}/Lab007/functions/fnSBRentProcess/bin/Release/net8.0"
+        "cwd": "${workspaceFolder}/Lab007/functions/fnPaymentProccess/bin/Release/net8.0"
       }
     },
     {
       "type": "func",
       "dependsOn": "build (functions)",
       "options": {
-        "cwd": "${workspaceFolder}/Lab007/functions/fnSBRentProcess/bin/Debug/net8.0"
+        "cwd": "${workspaceFolder}/Lab007/functions/fnPaymentProccess/bin/Debug/net8.0"
       },
       "command": "host start",
       "isBackground": true,
